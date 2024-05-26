@@ -7,10 +7,12 @@ int main() {
 	stack<int> numbersStack;
 	 
 	if (numbersStack.empty()) {
-		cout << "\tSteck is empty";
+		cout << "\tSteck is empty\n";
 	}
 	else {
-		cout << "\tSteck is not empty";
+		cout << "\tSteck is not empty\n";
 	}
+
+	cout << "\tSteck size is " << numbersStack.size() << endl;
 	system("pause>0");
 }
