@@ -3,9 +3,15 @@
 using namespace std;
 
 int main() {
-	// empty пуст, size размер ,push нажать ,pop хлопать ,top сверху;
+	// empty пуст, size размер ,push -> добавляет, pop -> удаляет элемент изверхней части стэка 
+	// // ,top ;
 	stack<int> numbersStack;
-	 
+	numbersStack.push(1);
+	numbersStack.push(2);
+	numbersStack.push(3);
+	numbersStack.pop();
+
+
 	if (numbersStack.empty()) {
 		cout << "\tSteck is empty\n";
 	}
