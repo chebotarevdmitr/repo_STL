@@ -1,28 +1,136 @@
-﻿#include <iostream>
-#include <queue>
-using namespace std;
-// funkciya kotoraya pechataet polnuyu ochered
-void printQueue(queue<int> queue) {
-	while (!queue.empty()){
-		cout << queue.front() << " ";
-		queue.pop();
-	}
-	cout << endl;
-}
+﻿/*
+Dima: Как я могу добавить задачу в свое расписание ?
+Чтобы добавить задачу в свое расписание, вы можете воспользоваться меню программы.Вот пошаговая инструкция, как это сделать :
 
+### Шаги для добавления задачи в расписание :
+
+1. Запустите программу :
+-Скомпилируйте и запустите программу на вашем компьютере.
+
+2. Просмотрите текущее расписание :
+-Программа автоматически отобразит текущее расписание.
+
+3. Выберите опцию для добавления задачи :
+-В меню выберите опцию "1" для добавления новой задачи.
+
+4. Введите время задачи :
+-Программа попросит вас ввести время задачи в формате "HH:MM".Например, "17:00".
+
+5. Введите описание задачи :
+-Программа попросит вас ввести описание задачи.Например, "Встреча с друзьями".
+
+6. Подтвердите добавление задачи :
+-После ввода времени и описания задачи, программа добавит задачу в конец очереди.
+
+### Пример взаимодействия с программой :
+
+Текущее расписание :
+07 : 00 - Просыпаюсь
+07 : 30 - Завтрак
+08 : 00 - Идём на работу
+12 : 00 - Обед
+13 : 00 - Возвращаемся к работе
+16 : 00 - Заканчиваем работу
+18 : 00 - Ужин
+22 : 00 - Ложимся спать
+
+Меню :
+1. Добавить задачу
+2. Удалить задачу
+3. Выйти
+Выберите действие : 1
+
+Введите время задачи(HH : MM) : 17 : 00
+Введите описание задачи : Встреча с друзьями
+
+Текущее расписание :
+07 : 00 - Просыпаюсь
+07 : 30 - Завтрак
+08 : 00 - Идём на работу
+12 : 00 - Обед
+13 : 00 - Возвращаемся к работе
+16 : 00 - Заканчиваем работу
+18 : 00 - Ужин
+22 : 00 - Ложимся спать
+17 : 00 - Встреча с друзьями
+
+Меню :
+1. Добавить задачу
+2. Удалить задачу
+3. Выйти
+Выберите действие :
+
+
+### Полный код программы :
+*/ 
+
+#include <iostream>
+#include <queue>
+#include <string>
+
+struct Task {
+    std::string time;
+    std::string description;
+};
+
+void displaySchedule(const std::queue<Task>& schedule) {
+    std::queue<Task> temp = schedule;
+    while (!temp.empty()) {
+        Task task = temp.front();
+        std::cout << task.time << " - " << task.description << std::endl;
+        temp.pop();
+    }
+}
 
 int main() {
-	cout << "\tochered\n";
-	queue<int>myQueue;
-	myQueue.push(1);//1funkciya dobavleniya v konec ocheredi
-	myQueue.push(2);
-	myQueue.push(3);
-	cout << "Size is " << myQueue.size() << endl;
-	cout << "First element is " << myQueue.front() << endl;
-	cout << "Last element is" << myQueue.back() << endl;
+    setlocale(LC_ALL, "rus");
+    std::queue<Task> schedule;
 
-	cout << "My queue :";
-	printQueue(myQueue);
+    // Изначальное расписание
+    schedule.push({ "07:00", "Просыпаюсь" });
+    schedule.push({ "07:30", "Завтрак" });
+    schedule.push({ "08:00", "Идём на работу" });
+    schedule.push({ "12:00", "Обед" });
+    schedule.push({ "13:00", "Возвращаемся к работе" });
+    schedule.push({ "16:00", "Заканчиваем работу" });
+    schedule.push({ "18:00", "Ужин" });
+    schedule.push({ "22:00", "Ложимся спать" });
 
-	system("pause>0");
+    int choice;
+    do {
+        std::cout << "nТекущее расписание:n";
+        displaySchedule(schedule);
+
+        std::cout << "nМеню:n";
+        std::cout << "1. Добавить задачуn";
+        std::cout << "2. Удалить задачуn";
+        std::cout << "3. Выйтиn";
+        std::cout << "Выберите действие: ";
+        std::cin >> choice;
+
+        if (choice == 1) {
+            Task newTask;
+            std::cout << "Введите время задачи (HH:MM): ";
+            std::cin >> newTask.time;
+            std::cin.ignore(); // Игнорируем оставшийся символ новой строки
+            std::cout << "Введите описание задачи: ";
+            std::getline(std::cin, newTask.description);
+            schedule.push(newTask);
+        }
+        else if (choice == 2) {
+            if (!schedule.empty()) {
+                schedule.pop();
+                std::cout << "Задача удалена.n";
+            }
+            else {
+                std::cout << "Расписание пусто.n";
+            }
+        }
+    } while (choice != 3);
+
+    return 0;
 }
+
+
+//### Заключение:
+//Следуя этим шагам, вы сможете легко добавлять новые задачи в свое расписание.Программа позволяет управлять задачами, добавляя их в конец очереди и удаляя из начала, что обеспечивает выполнение задач в определённом порядке.
