@@ -11,6 +11,8 @@ int main() {
 	myDictionary.insert(pair<string, string>("orange", "die Orange , die Apfelsine"));//apelsin
 	myDictionary.insert(pair<string, string>("strawberry", "die Erdbeere"));//klubnika
 
+	myDictionary["strawberry"] = "Die Erdbeere";//dostup k elementu
+
 	for (auto pair : myDictionary) {
 		cout << pair.first << " - " << pair.second << endl;
 	}
